@@ -23,9 +23,12 @@ for (const file of html) {
     const href = match[1];
     if (!href.startsWith("/") || href.startsWith("//")) continue;
 
-    let pathname = href;
-    if (pathname === base) pathname = "/";
-    else if (pathname.startsWith(`${base}/`)) pathname = pathname.slice(base.length);
+    if (href !== base && !href.startsWith(`${base}/`)) {
+      failures.push(`${file}: unbased internal link ${href}`);
+      continue;
+    }
+
+    let pathname = href === base ? "/" : href.slice(base.length);
 
     const local = decodeURIComponent(pathname.replace(/^\//, ""));
     const targets =

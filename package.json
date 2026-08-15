@@ -6,7 +6,7 @@
   "description": "Transformer architecture を理解するための日本語インタラクティブ教材",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && node scripts/normalize-pages-base.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "test:content": "node scripts/check-content.mjs",
