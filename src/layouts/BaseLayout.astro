@@ -42,11 +42,11 @@ const navigation = [
             <li><a href="/parts/7">VII. 一つ作る</a></li>
           </ul>
         </div>
-        <p class="nav-issue">Issue #1 first edition<br />静的サイト・外部 API 不要</p>
+        <p class="nav-issue">Issue #2 second edition<br />原典・数値例・実行可能な小実験</p>
       </aside>
       <div class="main-column">
         <header class="mobile-header"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">⟐</span><span>Atlas</span></a><nav>{navigation.slice(1, 4).map(([href, label]) => <a href={href}>{label}</a>)}</nav></header>
-        <div class="masthead"><div class="content-width"><span>直感 → 機構 → 最小の数式 → 小さな例 → コード</span><span class="pill">First edition</span></div></div>
+        <div class="masthead"><div class="content-width"><span>問題 → 直感 → 数値トレース → 数式 → コード</span><span class="pill">Second edition</span></div></div>
         <main id="content"><slot /></main>
         <footer class="content-width page-footer">Transformer Atlas は教育用の静的サイトです。図と小さな数値例は、特記がない限り理解のための簡略化です。</footer>
       </div>

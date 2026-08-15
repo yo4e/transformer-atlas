@@ -1,0 +1,174 @@
+{
+  "generatedAt": "2026-08-15T03:32:19.159Z",
+  "totalCharacters": 203169,
+  "chapters": [
+    {
+      "order": 1,
+      "title": "Transformer は何をしているのか",
+      "characters": 6331,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 2,
+      "title": "Tokens: 文字列が部品になる",
+      "characters": 6414,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 3,
+      "title": "Embeddings: ID がベクトルになる",
+      "characters": 6491,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 4,
+      "title": "Dot product: 向きと関連度を比べる",
+      "characters": 6512,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 5,
+      "title": "Attention が解く問題",
+      "characters": 5977,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 6,
+      "title": "Query, Key, Value",
+      "characters": 6867,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 7,
+      "title": "Scaling と softmax",
+      "characters": 7971,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 8,
+      "title": "Self-attention を最後まで通す",
+      "characters": 7882,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 9,
+      "title": "Multi-head attention",
+      "characters": 7825,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 10,
+      "title": "Position: 順序を入れる",
+      "characters": 8725,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 11,
+      "title": "Feed-forward network",
+      "characters": 8394,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 12,
+      "title": "Residual connection と normalization",
+      "characters": 8055,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 13,
+      "title": "一つの Transformer block",
+      "characters": 6673,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 14,
+      "title": "Encoder, decoder, decoder-only",
+      "characters": 6801,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 15,
+      "title": "Causal masking",
+      "characters": 6357,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 16,
+      "title": "Logits と次 token 予測",
+      "characters": 6917,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 17,
+      "title": "Temperature, top-k, top-p",
+      "characters": 5718,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 18,
+      "title": "何が学習されるのか",
+      "characters": 6162,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 19,
+      "title": "Loss: 間違いを数値にする",
+      "characters": 5955,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 20,
+      "title": "Gradient と backpropagation",
+      "characters": 6785,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 21,
+      "title": "Training loop",
+      "characters": 8694,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 22,
+      "title": "Context window",
+      "characters": 7731,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 23,
+      "title": "KV cache",
+      "characters": 7251,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 24,
+      "title": "Modern variations",
+      "characters": 7939,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 25,
+      "title": "Transformer だけでは説明できないこと",
+      "characters": 7758,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 26,
+      "title": "小さな Transformer を組み立てる",
+      "characters": 7969,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 27,
+      "title": "一つの token を追跡する",
+      "characters": 10051,
+      "model": "gpt-5-mini"
+    },
+    {
+      "order": 28,
+      "title": "Final map",
+      "characters": 6964,
+      "model": "gpt-5-mini"
+    }
+  ]
+}

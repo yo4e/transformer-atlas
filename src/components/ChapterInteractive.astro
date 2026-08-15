@@ -4,9 +4,11 @@ import TokenizerExplorer from "./TokenizerExplorer.astro";
 import DotProductLab from "./DotProductLab.astro";
 import SoftmaxSandbox from "./SoftmaxSandbox.astro";
 import CausalMask from "./CausalMask.astro";
+import AttentionPathLab from "./AttentionPathLab.astro";
 const { order } = Astro.props;
 ---
 {order === 2 && <TokenizerExplorer />}
 {order === 4 && <DotProductLab />}
+{(order === 6 || order === 8) && <AttentionPathLab />}
 {order === 7 && <SoftmaxSandbox />}
 {order === 15 && <CausalMask />}

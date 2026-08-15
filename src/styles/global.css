@@ -114,6 +114,18 @@ input[type="range"] { width: 100%; accent-color: var(--atlas); }
 .token { padding: .2rem .42rem; border: 1px solid var(--line); background: var(--paper); font-family: "IBM Plex Mono", monospace; font-size: .78rem; }
 .weight-bar { min-width: 4rem; padding: .4rem; background: linear-gradient(90deg, var(--atlas) var(--amount), transparent var(--amount)); border: 1px solid var(--line); font: .75rem/1 "IBM Plex Mono", monospace; }
 .answer { padding: .7rem; border-left: 3px solid var(--atlas); background: #f5f0e6; font-size: .84rem; }
+.lab { margin: 2.5rem 0; padding: 1.25rem; border: 1px solid var(--atlas); background: repeating-linear-gradient(0deg, rgba(21,94,117,.05) 0 1px, transparent 1px 24px), #e8f0ef; box-shadow: .35rem .35rem 0 rgba(21,94,117,.12); }
+.lab h2 { margin: 0 0 .65rem; color: var(--atlas-dark); font: 700 1.32rem/1.25 "IBM Plex Sans", "Noto Sans JP", sans-serif; letter-spacing: -.04em; }
+.lab > p { margin: .7rem 0 1rem; color: var(--muted); font-size: .9rem; }
+.path-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; padding: .8rem 0; border-block: 1px solid rgba(21,94,117,.3); }
+.path-controls label { display: grid; grid-template-columns: 2rem 1fr 3rem; align-items: center; gap: .45rem; color: var(--atlas-dark); font: .78rem "IBM Plex Mono", monospace; }
+.path-controls output { text-align: right; }
+.calc-table { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: 1rem; border: 1px solid var(--line); background: var(--line); }
+.calc-table div { padding: .7rem; background: #f7f4ec; }
+.calc-table span, .calc-table small { display: block; color: var(--muted); font: .65rem/1.4 "IBM Plex Mono", monospace; }
+.calc-table strong { display: block; margin: .3rem 0; color: var(--atlas-dark); font: 700 .85rem/1.35 "IBM Plex Mono", monospace; }
+.lab .note { margin: 1rem 0 0; padding: .7rem; border-left: 3px solid var(--copper); background: #f4e8dd; font-size: .82rem; }
+.lab details { margin-top: .8rem; font-size: .82rem; }.lab summary { cursor: pointer; color: var(--atlas-dark); font-weight: 700; }
 
 .index-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--line); background: var(--line); }
 .index-list a { display: block; padding: 1rem; background: var(--paper); text-decoration: none; }
@@ -139,6 +151,7 @@ input[type="range"] { width: 100%; accent-color: var(--atlas); }
   .section { padding: 3.25rem 0; }
   .section-heading { grid-template-columns: 1fr; gap: .4rem; }
   .feature-grid, .index-list { grid-template-columns: 1fr; }
+  .path-controls, .calc-table { grid-template-columns: 1fr; }
   .reading-grid { display: block; padding-top: 2.5rem; }
   .margin-notes { position: static; margin-top: 2rem; }
   .part-map { margin-inline: -1.15rem; border-inline: 0; }
