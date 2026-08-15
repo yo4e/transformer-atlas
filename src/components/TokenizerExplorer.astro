@@ -1,0 +1,24 @@
+---
+// Marginalia Atlas component: an accessible local-only demonstration, explicitly not a production tokenizer.
+---
+<section class="interactive" aria-labelledby="tokenizer-title">
+  <span class="eyebrow">Interactive / illustrative</span>
+  <h3 id="tokenizer-title">Tokenizer explorer</h3>
+  <p>短い文字列を、教育用の単純な区切り規則で分けます。これは実際の model tokenizer ではありません。</p>
+  <label for="token-input">試す文字列</label>
+  <input class="search-input" id="token-input" value="私は猫が好き" maxlength="48" />
+  <div class="token-list" id="token-output" aria-live="polite"></div>
+  <p class="answer" id="token-note">token は単語と一致するとは限りません。この表示は「分割と ID が別の処理である」ことだけを示します。</p>
+</section>
+<script>
+  const input = document.querySelector<HTMLInputElement>("#token-input");
+  const output = document.querySelector<HTMLDivElement>("#token-output");
+  if (input && output) {
+    const render = () => {
+      const chunks: string[] = input.value.match(/[A-Za-z]+|[0-9]+|[^\s]/gu) || ["∅"];
+      output.innerHTML = chunks.map((token: string, index: number) => `<span class="token">${index}: ${token.replaceAll("<", "&lt;")}</span>`).join("");
+    };
+    input.addEventListener("input", render);
+    render();
+  }
+</script>

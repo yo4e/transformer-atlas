@@ -1,0 +1,26 @@
+---
+// Marginalia Atlas home: an asymmetric map puts the learner's route before marketing copy.
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const chapters = (await getCollection("chapters")).sort((a, b) => a.data.order - b.data.order);
+const parts = ["テキストからベクトルへ", "Attention", "Transformer block", "Transformer から GPT へ", "学習", "現代の LLM を動かす", "一つ作る"];
+const starts = parts.map((title, index) => chapters.find((chapter) => chapter.data.part === index + 1));
+---
+<BaseLayout title="Transformer Atlas — Transformerを、式の意味から理解する。">
+  <section class="hero"><div class="content-width hero-inner">
+    <span class="eyebrow">An interactive Japanese field guide</span>
+    <h1>Transformer を、式の意味から理解する。</h1>
+    <p>高度な数学を前提にせず、**直感 → 実際の機構 → 最小の数式 → 小さな例 → コード**を往復します。これは「用語を知る」ためでなく、内部を説明できるようになるための技術地図帳です。</p>
+    <div class="hero-actions"><a class="button" href={`/chapters/${starts[0]?.id}`}>地図から読み始める</a><a class="button secondary" href="/math">数学の道具箱を開く</a></div>
+    <div class="hero-stats"><div><strong>28</strong><span>連続する章</span></div><div><strong>10</strong><span>数学の寄り道</span></div><div><strong>4</strong><span>手を動かす実験</span></div></div>
+  </div></section>
+  <section class="section content-width" aria-labelledby="route-title">
+    <div class="section-heading"><div><span class="eyebrow">The learning route</span></div><div><h2 id="route-title">先に、全体の道筋を見る。</h2><p>部品を暗記する前に、どの矢印が何を運び、どの章で詳しくなるかを把握します。各 Part は次の Part に必要な問いを残します。</p></div></div>
+    <div class="part-map">{starts.map((chapter, index) => chapter && <a href={`/parts/${index + 1}`}><span class="part-number">{String(index + 1).padStart(2, "0")}</span><h3>{parts[index]}</h3><span>{chapter.data.title} から開始</span></a>)}</div>
+  </section>
+  <section class="section tint"><div class="content-width">
+    <div class="section-heading"><div><span class="eyebrow">How to read</span></div><div><h2>比喩で止まらず、計算へ戻る。</h2><p>「Query は質問」という説明は入口として役立ちます。しかし本文では必ず、学習済み射影、行列積、shape、そしてコードまで戻ります。</p></div></div>
+    <div class="feature-grid"><article class="feature-card visual"><span class="pill">Attention</span><h3>重みは、何を集めるかを表す</h3><p>小さな score を softmax し、value の重み付き和になるまでを操作して確かめます。</p><a href={`/chapters/${chapters.find((c) => c.data.order === 7)?.id}`}>softmax を試す →</a></article><article class="feature-card"><span class="pill">Shapes</span><h3>数式は、入出力の形から読む</h3><p>行列は難解な装飾ではありません。どの軸が token で、どの軸が feature かを明らかにする表記です。</p><a href="/math">数学ページへ →</a></article><article class="feature-card"><span class="pill">Code</span><h3>小さな実装で一行ずつ照合する</h3><p>attention を高水準 API の一呼び出しに隠さず、causal mask と行列積を追跡します。</p><a href={`/chapters/${chapters.find((c) => c.data.order === 26)?.id}`}>tiny model へ →</a></article></div>
+  </div></section>
+  <section class="section content-width"><div class="section-heading"><div><span class="eyebrow">Reader promise</span></div><div><h2>「何となく」を、観察できる手順へ。</h2><p>各章では、教育用の簡略化と実際の仕組みを区別します。特定の head に人間的な役割を決めつけず、attention weight を万能な説明として扱わず、architecture と data・post-training・tools を混同しません。</p></div></div><a class="button" href={`/chapters/${starts[0]?.id}`}>Part I を始める</a></section>
+</BaseLayout>

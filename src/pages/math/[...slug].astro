@@ -1,0 +1,12 @@
+---
+// Marginalia Atlas math route: the reference remains connected to the main curriculum through purpose, not prerequisite pressure.
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+export async function getStaticPaths() {
+  const pages = await getCollection("math");
+  return pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+<BaseLayout title={`${page.data.title} | Transformer Atlas`} description={page.data.summary}><div class="content-width reading-grid"><article><header class="chapter-header"><span class="eyebrow">Math reference {String(page.data.order).padStart(2, "0")}</span><h1>{page.data.title}</h1><p class="chapter-summary">{page.data.summary}</p></header><div class="prose"><Content /></div><p><a class="button secondary" href="/math">数学の道具箱へ戻る</a></p></article><aside class="margin-notes"><div class="note"><strong>読み方</strong>このページを完璧に終える必要はない。本文へ戻って「どこで使われるか」を見る。</div><div class="note"><strong>参照</strong>{page.data.references.map((reference) => <a href={reference.url}>{reference.label}</a>)}</div></aside></div></BaseLayout>

@@ -1,0 +1,7 @@
+---
+// Marginalia Atlas math index: mathematics is an optional side route, never a gate before architecture.
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const pages = (await getCollection("math")).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="数学の道具箱 | Transformer Atlas"><section class="section content-width"><div class="section-heading"><div><span class="eyebrow">Math side path</span></div><div><h2>必要になった道具だけ、取り出す。</h2><p>これは前提コースではありません。本文で vector や softmax が現れたとき、「何か」「なぜ必要か」「最小の計算は何か」を確認するための横道です。</p></div></div><div class="index-list">{pages.map((page) => <a href={`/math/${page.id}`}><strong>{String(page.data.order).padStart(2, "0")} / {page.data.title}</strong><span>{page.data.summary}</span></a>)}</div></section></BaseLayout>

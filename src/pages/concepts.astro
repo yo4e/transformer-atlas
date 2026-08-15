@@ -1,0 +1,8 @@
+---
+// Marginalia Atlas concept index: concepts are cross-checked against their first chapter rather than only tagged.
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const chapters = (await getCollection("chapters")).sort((a, b) => a.data.order - b.data.order);
+const concepts = chapters.map((chapter) => ({ label: chapter.data.concepts[0], title: chapter.data.title, id: chapter.id, order: chapter.data.order })).sort((a, b) => a.label.localeCompare(b.label, "ja"));
+---
+<BaseLayout title="概念索引 | Transformer Atlas"><section class="section content-width"><div class="section-heading"><div><span class="eyebrow">Concept index</span></div><div><h2>言葉を、最初に必要になった場所へ戻す。</h2><p>索引は定義の置き場であると同時に、概念が何の問題を解くために現れたかを思い出す入口です。</p></div></div><div class="index-list">{concepts.map((concept) => <a href={`/chapters/${concept.id}`}><strong>{concept.label}</strong><span>Chapter {String(concept.order).padStart(2, "0")} — {concept.title}</span></a>)}</div></section></BaseLayout>

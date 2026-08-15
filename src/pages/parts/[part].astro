@@ -1,0 +1,12 @@
+---
+// Marginalia Atlas part route: a part is a navigable field of study, not a flat chapter list.
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+export async function getStaticPaths() {
+  const names = ["テキストからベクトルへ", "Attention", "Transformer block", "Transformer から GPT へ", "学習", "現代の LLM を動かす", "一つ作る"];
+  const chapters = await getCollection("chapters");
+  return names.map((name, index) => ({ params: { part: String(index + 1) }, props: { name, chapters: chapters.filter((chapter) => chapter.data.part === index + 1).sort((a, b) => a.data.order - b.data.order) } }));
+}
+const { name, chapters } = Astro.props;
+---
+<BaseLayout title={`Part ${Astro.params.part}: ${name} | Transformer Atlas`}><section class="section content-width"><div class="section-heading"><div><span class="eyebrow">Part {Astro.params.part}</span></div><div><h2>{name}</h2><p>この Part の章を順に読めば、次の段階で必要になる問いと記法がつながります。気になる章から開いても構いませんが、前提を感じたら前の章へ戻ってください。</p></div></div><div class="index-list">{chapters.map((chapter) => <a href={`/chapters/${chapter.id}`}><strong>{String(chapter.data.order).padStart(2, "0")} / {chapter.data.title}</strong><span>{chapter.data.summary}</span></a>)}</div></section></BaseLayout>

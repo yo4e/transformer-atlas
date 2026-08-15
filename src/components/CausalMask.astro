@@ -1,0 +1,25 @@
+---
+// Marginalia Atlas component: hatch patterns and text label masked positions in addition to color.
+const cells = Array.from({ length: 36 }, (_, index) => ({ row: Math.floor(index / 6), col: index % 6 }));
+---
+<section class="interactive" aria-labelledby="mask-title">
+  <span class="eyebrow">Interactive / illustrative matrix</span>
+  <h3 id="mask-title">Causal-mask matrix</h3>
+  <p>行は「今、予測している位置」、列は「参照候補」を表します。斜めより右上は未来なので、score を softmax に入れる前に除外します。</p>
+  <button class="button secondary" id="mask-toggle" type="button" aria-pressed="true">mask を表示中</button>
+  <div class="matrix" id="mask-matrix" role="img" aria-label="6行6列の causal mask。右上三角は未来のため隠されている。">
+    {cells.map(({ row, col }) => <span class={col > row ? "masked" : row === col ? "active" : ""}>{col > row ? "×" : "✓"}</span>)}
+  </div>
+  <p class="answer" id="mask-note">× は「token を削除する」意味ではなく、この位置への attention score を選ばれないほど小さくする教育用の表記です。</p>
+</section>
+<script>
+  const button = document.querySelector("#mask-toggle");
+  const cells = [...document.querySelectorAll("#mask-matrix span")];
+  let visible = true;
+  button?.addEventListener("click", () => {
+    visible = !visible;
+    button.textContent = visible ? "mask を表示中" : "mask を一時的に隠す";
+    button.setAttribute("aria-pressed", String(visible));
+    cells.forEach((cell) => cell.classList.toggle("masked", visible && cell.textContent === "×"));
+  });
+</script>

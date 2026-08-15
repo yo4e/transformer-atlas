@@ -1,0 +1,12 @@
+---
+// Marginalia Atlas component: render only the interaction that clarifies the current chapter's bottleneck.
+import TokenizerExplorer from "./TokenizerExplorer.astro";
+import DotProductLab from "./DotProductLab.astro";
+import SoftmaxSandbox from "./SoftmaxSandbox.astro";
+import CausalMask from "./CausalMask.astro";
+const { order } = Astro.props;
+---
+{order === 2 && <TokenizerExplorer />}
+{order === 4 && <DotProductLab />}
+{order === 7 && <SoftmaxSandbox />}
+{order === 15 && <CausalMask />}

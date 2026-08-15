@@ -1,0 +1,32 @@
+{
+  "name": "transformer-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Transformer architecture を理解するための日本語インタラクティブ教材",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test:content": "node scripts/check-content.mjs",
+    "test:tiny": "python3 examples/test_tiny_transformer.py",
+    "test:links": "node scripts/check-dist-links.mjs",
+    "test": "pnpm test:content && pnpm test:tiny",
+    "postbuild": "pagefind --site dist"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/mdx": "^4.3.5",
+    "@astrojs/sitemap": "^3.3.1",
+    "astro": "^5.13.7",
+    "pagefind": "^1.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "CC-BY-4.0"
+}

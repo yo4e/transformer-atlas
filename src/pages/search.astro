@@ -1,0 +1,9 @@
+---
+// Marginalia Atlas search: a small no-infrastructure search surface keeps static deployment simple.
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const chapters = (await getCollection("chapters")).sort((a, b) => a.data.order - b.data.order);
+const math = (await getCollection("math")).sort((a, b) => a.data.order - b.data.order);
+const entries = [...chapters.map((entry) => ({ href: `/chapters/${entry.id}`, title: entry.data.title, summary: entry.data.summary, kind: "章" })), ...math.map((entry) => ({ href: `/math/${entry.id}`, title: entry.data.title, summary: entry.data.summary, kind: "数学" }))];
+---
+<BaseLayout title="検索 | Transformer Atlas"><section class="section content-width"><div class="section-heading"><div><span class="eyebrow">Static search</span></div><div><h2>概念名から、説明の場へ。</h2><p>軽量な一覧検索です。静的配信のまま、タイトルと概要を絞り込みます。</p></div></div><label for="atlas-search">キーワード</label><input class="search-input" id="atlas-search" type="search" placeholder="例: attention, mask, gradient" autocomplete="off" /><p id="search-count" aria-live="polite"></p><div class="index-list" id="search-list">{entries.map((entry) => <a href={entry.href} data-search={`${entry.title} ${entry.summary} ${entry.kind}`}><strong><span class="pill">{entry.kind}</span> {entry.title}</strong><span>{entry.summary}</span></a>)}</div></section><script>const input=document.querySelector<HTMLInputElement>("#atlas-search");const cards=[...document.querySelectorAll<HTMLAnchorElement>("#search-list a")];const count=document.querySelector<HTMLParagraphElement>("#search-count");if(input&&count){const filter=()=>{const query=input.value.toLocaleLowerCase("ja").trim();let shown=0;cards.forEach((card)=>{const match=(card.dataset.search??"").toLocaleLowerCase("ja").includes(query);card.hidden=!match;if(match)shown++});count.textContent=`${shown} 件を表示`;};input.addEventListener("input",filter);filter();}</script></BaseLayout>

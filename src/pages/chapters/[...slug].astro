@@ -1,0 +1,36 @@
+---
+// Marginalia Atlas chapter route: prose carries the lesson; the margin carries shape, caution, and source context.
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChapterInteractive from "../../components/ChapterInteractive.astro";
+export async function getStaticPaths() {
+  const chapters = await getCollection("chapters");
+  return chapters.map((chapter) => ({ params: { slug: chapter.id }, props: { chapter } }));
+}
+const { chapter } = Astro.props;
+const chapters = (await getCollection("chapters")).sort((a, b) => a.data.order - b.data.order);
+const index = chapters.findIndex((item) => item.id === chapter.id);
+const previous = chapters[index - 1];
+const next = chapters[index + 1];
+const { Content } = await render(chapter);
+---
+<BaseLayout title={`${chapter.data.title} | Transformer Atlas`} description={chapter.data.summary}>
+  <div class="content-width reading-grid">
+    <article>
+      <header class="chapter-header"><span class="eyebrow">Part {chapter.data.part} / Chapter {String(chapter.data.order).padStart(2, "0")}</span><h1>{chapter.data.title}</h1><p class="chapter-summary">{chapter.data.summary}</p></header>
+      <div class="prose"><Content /></div>
+      <ChapterInteractive order={chapter.data.order} />
+      <nav class="chapter-nav" aria-label="章の移動">
+        {previous ? <a href={`/chapters/${previous.id}`}><span>← 前の章</span>{previous.data.title}</a> : <span />}
+        {next ? <a href={`/chapters/${next.id}`} style="text-align:right"><span>次の章 →</span>{next.data.title}</a> : <span />}
+      </nav>
+    </article>
+    <aside class="margin-notes" aria-label="章の注釈">
+      <div class="note"><strong>この章の位置</strong>Part {chapter.data.part} の第 {chapter.data.order} 章。先へ急ぐ必要はありません。式の入力と出力を指させることが次の目安です。</div>
+      <div class="note"><strong>概念</strong>{chapter.data.concepts.join(" / ")}</div>
+      <div class="note"><strong>形を確認</strong>token 軸と feature 軸を混同しない。matrix が出たら左から右へ shape を読む。</div>
+      <div class="note"><strong>資料</strong>{chapter.data.references.map((reference) => <a href={reference.url}>{reference.label}</a>)}</div>
+      {chapter.data.order === 26 && <div class="note"><strong>実装</strong><a href="https://github.com/yo4e/transformer-atlas/blob/main/examples/tiny_transformer.py">tiny_transformer.py を読む</a></div>}
+    </aside>
+  </div>
+</BaseLayout>

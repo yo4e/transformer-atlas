@@ -2,52 +2,46 @@
 
 **Transformerを、式の意味から理解する。**
 
-Transformer Atlas is a Japanese, interactive learning site for understanding how Transformer-based language models work without assuming advanced mathematics.
+Transformer Atlas は、Transformer を「用語集」ではなく**読める機械**として理解するための日本語インタラクティブ教材です。対象は、中学程度の計算を追える一方で、線形代数や微積を前提にされたくない成人学習者です。
 
-The goal is not to train readers to solve long algebra exercises. It is to make the machinery legible: why vectors are useful, why dot products appear in attention, what Query / Key / Value are doing, why softmax is needed, how a Transformer block fits together, and how that eventually becomes GPT-style next-token prediction.
+本文は **直感 → 実際の機構 → 最小の数式 → 小さな例 → コード** を繰り返します。token、embedding、Q/K/V、softmax、causal mask、Transformer block、next-token prediction、loss、gradient、KV cache までを、最終的な小型 decoder-only Transformer と接続します。
 
-## Product idea
+## 第一版に含まれるもの
 
-The site should combine:
+| 領域 | 内容 |
+| --- | --- |
+| コース | 7 Part・28章の連続カリキュラム。Part 概要、前後移動、概念索引を含む。 |
+| 数学の横道 | vector、matrix、transpose、softmax、gradient など10ページ。前提コースではなく必要なときに参照する。 |
+| 操作 | 教材用 tokenizer、dot product、softmax、causal mask のローカル実験。外部 API は不要。 |
+| 実装 | attention を隠さない決定的な Tiny Transformer forward trace とテスト。 |
+| 検証 | content/frontmatter、Python 実装、Astro 型検査・静的ビルド、内部リンク、CI。 |
 
-- a coherent book-length curriculum;
-- one Markdown / MDX chapter per topic;
-- interactive diagrams and small experiments;
-- minimal but honest mathematics;
-- executable or inspectable code examples;
-- short comprehension checks;
-- a final tiny Transformer implementation that links each code section back to the relevant chapter.
+## ローカルで動かす
 
-The intended experience is closer to an **interactive atlas** than a static textbook: readers should be able to move between concepts, formulas, diagrams, and code.
+```bash
+pnpm install
+pnpm dev
+```
 
-## Target reader
+品質確認は次の順で実行します。
 
-The initial curriculum is designed for an adult learner who:
+```bash
+pnpm test
+pnpm build
+pnpm test:links
+```
 
-- can follow middle-school mathematics;
-- does not want advanced mathematics treated as prerequisite knowledge;
-- values conceptual and architectural understanding over hand-calculation speed;
-- wants every new mathematical object explained when it first appears;
-- wants to understand what a formula is *for*, not merely memorize it;
-- is comfortable reading ordinary technical prose and simple code when carefully explained.
+## 設計・出典・保守情報
 
-## Planned stack
+- [カリキュラムと製品設計](./docs/DESIGN.md)
+- [実行要件](./docs/MANUS_BRIEF.md)
+- [出典と利用範囲](./docs/research/SOURCES.md)
+- [サイトアーキテクチャ](./docs/ARCHITECTURE.md)
+- [執筆・用語規約](./docs/CONTENT_STYLE.md)
+- [配信手順](./docs/DEPLOYMENT.md)
+- [既知の制約](./docs/KNOWN_LIMITATIONS.md)
+- [貢献方法](./CONTRIBUTING.md)
 
-The initial implementation direction is:
+## ライセンス
 
-- Astro;
-- Markdown / MDX content;
-- lightweight browser-side interactive visualizations;
-- static-first deployment;
-- no mandatory account, API key, hosted model, or paid service.
-
-Exact implementation details may change after technical validation.
-
-## Project documents
-
-- [`docs/DESIGN.md`](./docs/DESIGN.md) — curriculum, UX, content, and technical design
-- [`docs/MANUS_BRIEF.md`](./docs/MANUS_BRIEF.md) — autonomous build brief for Manus
-
-## Status
-
-Early design / build phase.
+教材本文とプロジェクト文書は [CC BY 4.0](./LICENSE) です。各一次資料・外部ライブラリには、それぞれのライセンスが適用されます。

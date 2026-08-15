@@ -1,0 +1,35 @@
+---
+// Marginalia Atlas component: the stable calculation and text alternative are updated together.
+---
+<section class="interactive" aria-labelledby="softmax-title">
+  <span class="eyebrow">Interactive / local calculation</span>
+  <h3 id="softmax-title">Softmax sandbox</h3>
+  <p>三つの score と temperature から、和が 1 になる相対重みを作ります。これは確信度の計測器ではありません。</p>
+  <div class="control-row"><label for="s1">score A</label><input id="s1" type="range" min="-4" max="4" value="2" /><output for="s1">2</output></div>
+  <div class="control-row"><label for="s2">score B</label><input id="s2" type="range" min="-4" max="4" value="1" /><output for="s2">1</output></div>
+  <div class="control-row"><label for="s3">score C</label><input id="s3" type="range" min="-4" max="4" value="-1" /><output for="s3">-1</output></div>
+  <div class="control-row"><label for="temp">temperature</label><input id="temp" type="range" min="0.25" max="2" step="0.25" value="1" /><output for="temp">1</output></div>
+  <div class="weights" id="softmax-output" aria-live="polite"></div>
+  <p class="answer" id="softmax-note"></p>
+</section>
+<script>
+  const softmaxIds = ["s1", "s2", "s3", "temp"];
+  const controls = softmaxIds.map((id) => document.querySelector<HTMLInputElement>(`#${id}`));
+  const outputs = softmaxIds.map((id) => document.querySelector<HTMLOutputElement>(`output[for="${id}"]`));
+  const container = document.querySelector<HTMLDivElement>("#softmax-output");
+  const note = document.querySelector<HTMLParagraphElement>("#softmax-note");
+  if (controls.every(Boolean) && outputs.every(Boolean) && container && note) {
+    const inputs = controls as HTMLInputElement[];
+    const updateSoftmax = () => {
+      const vals = inputs.map((input) => Number(input.value));
+      outputs.forEach((output, index) => (output!.textContent = String(vals[index])));
+      const scores = vals.slice(0, 3).map((score) => score / vals[3]);
+      const max = Math.max(...scores), exp = scores.map((score) => Math.exp(score - max)), total = exp.reduce((a, b) => a + b, 0);
+      const weights = exp.map((value) => value / total);
+      container.innerHTML = weights.map((weight, index) => `<span class="weight-bar" style="--amount:${Math.round(weight * 100)}%">${String.fromCharCode(65 + index)} ${(weight * 100).toFixed(1)}%</span>`).join("");
+      note.textContent = `重みの合計は ${(weights.reduce((a, b) => a + b, 0)).toFixed(2)}。temperature を下げると、相対的に大きい score への集中が強くなります。`;
+    };
+    inputs.forEach((input) => input.addEventListener("input", updateSoftmax));
+    updateSoftmax();
+  }
+</script>

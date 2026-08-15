@@ -1,0 +1,55 @@
+---
+// Marginalia Atlas layout: a persistent curriculum margin frames every reading route.
+import "../styles/global.css";
+const { title = "Transformer Atlas", description = "Transformerを、式の意味から理解する。" } = Astro.props;
+const navigation = [
+  ["/", "はじめに"], ["/parts/1", "学習ルート"], ["/concepts", "概念索引"], ["/math", "数学の道具箱"], ["/search", "検索"]
+];
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">本文へ移動</a>
+    <div class="site-shell">
+      <aside class="site-nav" aria-label="主なナビゲーション">
+        <a class="brand" href="/" aria-label="Transformer Atlas ホーム">
+          <span class="brand-mark" aria-hidden="true">⟐</span>
+          <span>Transformer Atlas<small>architecture reading room</small></span>
+        </a>
+        <nav class="nav-group" aria-label="学ぶ場所">
+          <span class="nav-label">Navigate</span>
+          <ul>{navigation.map(([href, label]) => <li><a href={href}>{label}</a></li>)}</ul>
+        </nav>
+        <div class="nav-group">
+          <span class="nav-label">Parts</span>
+          <ul>
+            <li><a href="/parts/1">I. テキストからベクトルへ</a></li>
+            <li><a href="/parts/2">II. Attention</a></li>
+            <li><a href="/parts/3">III. Transformer block</a></li>
+            <li><a href="/parts/4">IV. Transformer から GPT へ</a></li>
+            <li><a href="/parts/5">V. 学習</a></li>
+            <li><a href="/parts/6">VI. 現代の LLM</a></li>
+            <li><a href="/parts/7">VII. 一つ作る</a></li>
+          </ul>
+        </div>
+        <p class="nav-issue">Issue #1 first edition<br />静的サイト・外部 API 不要</p>
+      </aside>
+      <div class="main-column">
+        <header class="mobile-header"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">⟐</span><span>Atlas</span></a><nav>{navigation.slice(1, 4).map(([href, label]) => <a href={href}>{label}</a>)}</nav></header>
+        <div class="masthead"><div class="content-width"><span>直感 → 機構 → 最小の数式 → 小さな例 → コード</span><span class="pill">First edition</span></div></div>
+        <main id="content"><slot /></main>
+        <footer class="content-width page-footer">Transformer Atlas は教育用の静的サイトです。図と小さな数値例は、特記がない限り理解のための簡略化です。</footer>
+      </div>
+    </div>
+  </body>
+</html>
